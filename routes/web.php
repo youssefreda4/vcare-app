@@ -14,6 +14,7 @@ Route::get('/contact', [ContactController::class, "index"]);
 Route::post('/send-message', [ContactController::class, "sendMessage"]);
 
 Route::get('/majors', [MajorController::class, "index"]);
+Route::get('/majors/{major}/doctors', [MajorController::class, "doctors"]);
 
 require_once ('admin.php');
 

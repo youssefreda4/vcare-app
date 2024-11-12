@@ -4,6 +4,7 @@ namespace App\Http\Controllers\front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Major;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MajorController extends Controller
@@ -13,7 +14,16 @@ class MajorController extends Controller
         //paginate
         //simplePaginate
         //cursorPaginate
-        $majors = Major::orderBy("id","DESC")->paginate(12);
+        $majors = Major::orderBy("id", "DESC")->paginate(12);
         return view('front.majors.index', ["majors" => $majors]);
+    }
+
+    public function doctors(Major $major)
+    {
+        $doctors = User::with('major')
+            ->where('role', 'doctor')
+            ->where('major_id', $major->id)
+            ->paginate(12);
+        return view('front.doctors.index', compact('doctors'));
     }
 }

@@ -41,6 +41,7 @@
                         <a type="button" class="btn btn-outline-light navigation--button"
                             href="{{url('/doctors')}}">Doctors</a>
                         <a type="button" class="btn btn-outline-light navigation--button" href="./login.html">login</a>
+                        <a type="button" class="btn btn-outline-light navigation--button" href="./login.html">Register</a>
                     </div>
                 </div>
             </div>
