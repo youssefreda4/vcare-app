@@ -9,15 +9,17 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function register(){
+    public function register()
+    {
         return view('auth/register');
     }
 
-    public function store(Request $requst){
-        $data = $requst -> validate([
-            "name" =>['required','string','max:30','min:5'],
-            'email' => ['required','string','email','unique:users'],
-            'password' => ['required','string','min:8','confirmed'] // or  confirm:password(confirmation-password)
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            "name" => ['required', 'string', 'max:30', 'min:5'],
+            'email' => ['required', 'string', 'email', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'] // or  confirm:password(confirmation-password)
         ]);
 
         $user = User::create($data);
@@ -27,9 +29,9 @@ class AuthController extends Controller
         return redirect()->route('home');
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect()->route('home');
     }
-
 }

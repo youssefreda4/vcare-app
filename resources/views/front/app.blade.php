@@ -42,7 +42,7 @@
                         <a type="button" class="btn btn-outline-light navigation--button"
                             href="{{ url('/doctors') }}">Doctors</a>
                         @guest
-                            <a type="button" class="btn btn-outline-light navigation--button" href="./login.html">login</a>
+                            <a type="button" class="btn btn-outline-light navigation--button" href="{{ route('auth.login') }}">login</a>
                             <a type="button" class="btn btn-outline-light navigation--button"
                                 href="{{ route('auth.register') }}">Register</a>
                         @endguest
