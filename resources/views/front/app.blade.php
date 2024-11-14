@@ -26,7 +26,7 @@
         <nav class="navbar navbar-expand-lg navbar-expand-md bg-blue sticky-top">
             <div class="container">
                 <div class="navbar-brand">
-                    <a class="fw-bold text-white m-0 text-decoration-none h3" href="{{url('/')}}">VCare</a>
+                    <a class="fw-bold text-white m-0 text-decoration-none h3" href="{{ url('/') }}">VCare</a>
                 </div>
                 <button class="navbar-toggler btn-outline-light border-0 shadow-none" type="button"
                     data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -35,20 +35,31 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                     <div class="d-flex gap-3 flex-wrap justify-content-center" role="group">
-                        <a type="button" class="btn btn-outline-light navigation--button" href="{{url('/')}}">Home</a>
                         <a type="button" class="btn btn-outline-light navigation--button"
-                            href="{{url('/majors')}}">Majors</a>
+                            href="{{ url('/') }}">Home</a>
                         <a type="button" class="btn btn-outline-light navigation--button"
-                            href="{{url('/doctors')}}">Doctors</a>
-                        <a type="button" class="btn btn-outline-light navigation--button" href="./login.html">login</a>
-                        <a type="button" class="btn btn-outline-light navigation--button" href="./login.html">Register</a>
+                            href="{{ url('/majors') }}">Majors</a>
+                        <a type="button" class="btn btn-outline-light navigation--button"
+                            href="{{ url('/doctors') }}">Doctors</a>
+                        @guest
+                            <a type="button" class="btn btn-outline-light navigation--button" href="./login.html">login</a>
+                            <a type="button" class="btn btn-outline-light navigation--button"
+                                href="{{ route('auth.register') }}">Register</a>
+                        @endguest
+
+                        @auth
+                            <form action="{{ route('auth.logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-outline-light navigation--button">Logout</button>
+                            </form>
+                        @endauth
                     </div>
                 </div>
             </div>
         </nav>
 
-    
-            @yield('content')
+
+        @yield('content')
 
         <div class="banner container d-block d-lg-grid d-md-block d-sm-block">
             <div class="info">
@@ -144,12 +155,12 @@
             <div class="col-sm order-sm-2">
                 <h1 class="h1">Links</h1>
                 <div class="links d-flex gap-2 flex-wrap">
-                    <a href="{{url('/')}}" class="link text-white">Home</a>
-                    <a href="{{url('/majors')}}" class="link text-white">Majors</a>
-                    <a href="{{url('/doctors')}}" class="link text-white">Doctors</a>
+                    <a href="{{ url('/') }}" class="link text-white">Home</a>
+                    <a href="{{ url('/majors') }}" class="link text-white">Majors</a>
+                    <a href="{{ url('/doctors') }}" class="link text-white">Doctors</a>
                     <a href="./login.html" class="link text-white">Login</a>
                     <a href="./register.html" class="link text-white">Register</a>
-                    <a href="{{url('contact')}}" class="link text-white">Contact</a>
+                    <a href="{{ url('contact') }}" class="link text-white">Contact</a>
                 </div>
             </div>
         </div>

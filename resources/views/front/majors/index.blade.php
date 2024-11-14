@@ -36,7 +36,7 @@
                             <form action="{{ url('majors/' . $major->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-outline-danger mt-2 card-button">Delete Major</button>
+                                <button type="submit" class="btn btn-danger mt-2 card-button">Delete Major</button>
                             </form>
                         @endauth
                     </div>

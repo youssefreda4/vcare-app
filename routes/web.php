@@ -6,7 +6,7 @@ use App\Http\Controllers\front\DoctorController;
 use App\Http\Controllers\front\HomeController;
 use App\Http\Controllers\front\MajorController;
 
-Route::get('/', [HomeController::class, "index"]);
+Route::get('/', [HomeController::class, "index"])->name('home');
 Route::get('/doctors', [DoctorController::class, "index"]);
 
 
@@ -17,4 +17,5 @@ Route::get('/majors', [MajorController::class, "index"]);
 Route::get('/majors/{major}/doctors', [MajorController::class, "doctors"]);
 
 require_once ('admin.php');
+require_once (__DIR__.'/auth.php');
 
