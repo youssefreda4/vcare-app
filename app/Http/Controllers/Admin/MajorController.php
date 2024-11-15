@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MajorRequest;
 use App\Http\Traits\uploadImage;
 use App\Models\Major;
 use Illuminate\Http\Request;
@@ -12,21 +13,29 @@ class MajorController extends Controller
 
     use uploadImage;
 
-    public function create()
+    public function index()
     {
-        return view('admin.majors.create');
+        $majors = Major::orderBy("id", "DESC")->paginate(12);
+        return view('admin.pages.majors.index' ,compact('majors'));
     }
 
-    public function store()
+    public function create()
     {
+        return view('admin.pages.majors.create');
+    }
+
+    public function store(MajorRequest $request)
+    {
+
+        //use valedation  make:request
         //vaidation
-        request()->validate(
-            [
-                //another direction use pipeline => |
-                "name" => "required|string|min:3|max:30",
-                "image" => "required|image"
-            ]
-        );
+        // request()->validate(
+        //     [
+        //         //another direction use pipeline => |
+        //         "name" => "required|string|min:3|max:30",
+        //         "image" => "required|image"
+        //     ]
+        // );
 
         // $image_name = request()->image->getClientOriginalName();
         // // $image_ext = request()->image->getClientOriginalExtension(); //or extension();
@@ -34,14 +43,18 @@ class MajorController extends Controller
         // request()->image->move(public_path('uploads/majors/'), $image_name);
 
         $image_name = $this->upload('uploads/majors/');
+        $data = $request->validated();
+        $data['image'] = $image_name;
+        //stote data anther diriction
+        Major::create($data);
 
         //Mass Assignment
-        Major::create([
-            'name' => request()->name,
-            "image" => $image_name
-        ]);
+        // Major::create([
+        //     'name' => request()->name,
+        //     "image" => $image_name
+        // ]);
 
-        return redirect('majors/add')->with("success", "Your major created successfully");
+        return redirect()->route('major.create')->with("success", "Your major created successfully");
     }
 
     //use model binding
@@ -88,7 +101,7 @@ class MajorController extends Controller
         $major->image = $image_name;
         $major->save();
 
-        return back()->with('success', 'data updated successfully');
+        return redirect()->route('major.create')->with('success', 'data updated successfully');
     }
 
     public function destory(Major $major)
