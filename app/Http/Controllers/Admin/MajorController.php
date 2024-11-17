@@ -7,6 +7,7 @@ use App\Http\Requests\MajorRequest;
 use App\Http\Traits\uploadImage;
 use App\Models\Major;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class MajorController extends Controller
 {
@@ -16,7 +17,7 @@ class MajorController extends Controller
     public function index()
     {
         $majors = Major::orderBy("id", "DESC")->paginate(12);
-        return view('admin.pages.majors.index' ,compact('majors'));
+        return view('admin.pages.majors.index', compact('majors'));
     }
 
     public function create()
@@ -74,13 +75,12 @@ class MajorController extends Controller
         // $major = Major::findOrFail($id);
 
         //shortcut for this
-        return view('admin.majors.edit', compact("major"));
+        return view('admin.pages.majors.edit', compact("major"));
     }
 
     public function update(Major $major)
     {
 
-        // dd($major);
         //vaidation
         request()->validate(
             [
@@ -97,11 +97,15 @@ class MajorController extends Controller
             $image_name = $this->upload('uploads/majors/');
         }
 
-        $major->name = request()->name;
-        $major->image = $image_name;
-        $major->save();
+        $major->update([
+            'name' => request()->name,
+            "image" => $image_name
+        ]);
+        // $major->name = request()->name;
+        // $major->image = $image_name;
+        // $major->save();
 
-        return redirect()->route('major.create')->with('success', 'data updated successfully');
+        return redirect()->route('major.edit', ['major' => $major->id])->with('success', 'data updated successfully');
     }
 
     public function destory(Major $major)

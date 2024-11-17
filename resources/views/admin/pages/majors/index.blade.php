@@ -8,17 +8,18 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Add Major</h1>
+                        <h1>All Major</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Add Major</li>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard.home') }}">Home</a></li>
+                            <li class="breadcrumb-item active">All Majors</li>
                         </ol>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
+
 
         <!-- Main content -->
         <section class="content">
@@ -26,10 +27,12 @@
                 <div class="row">
                     <!-- left column -->
                     <div class="col-md-12">
+                        <div>
+                            <x-error></x-error>
+                            <x-success></x-success>
+                        </div>
                         <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Bordered Table</h3>
-                            </div>
+
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <table class="table table-bordered">
@@ -41,28 +44,34 @@
                                             <th>Image</th>
                                             <th class="text-center">Edit</th>
                                             <th class="text-center">Delete</th>
-                                            
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                       
-                                        @foreach ($majors as $major )
-                                        <tr>
-                                            <td>{{ $major->id }}</td>
-                                            <td>{{ $major->name }}</td>
-                                            <td>{{ $major->image }}</td>
-                                            <td>
-                                                <img src="{{ asset('uploads/majors/'.$major->image) }}" width="150px">
-                                            </td>
-                                            <th class="text-center">
-                                                <a href="" class="btn btn-info">Edit</a>
-                                            </th>
-                                            <th class="text-center">
-                                                <a href="" class="btn btn-danger">Delete</a>
-                                            </th>
-                                        </tr>
+
+                                        @foreach ($majors as $major)
+                                            <tr>
+                                                <td>{{ $major->id }}</td>
+                                                <td>{{ $major->name }}</td>
+                                                <td>{{ $major->image }}</td>
+                                                <td>
+                                                    <img src="{{ asset('uploads/majors/' . $major->image) }}" width="150px">
+                                                </td>
+                                                <th class="text-center">
+                                                    <a href="{{ route('major.edit', ['major' => $major->id]) }}"
+                                                        class="btn btn-warning">Edit</a>
+                                                </th>
+                                                <th class="text-center">
+                                                    <form action="{{ route('major.delete', ['major' => $major->id]) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </form>
+                                                </th>
+                                            </tr>
                                         @endforeach
- 
+
                                     </tbody>
                                 </table>
                             </div>

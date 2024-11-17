@@ -12,7 +12,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard.home') }}">Home</a></li>
                             <li class="breadcrumb-item active">Add Major</li>
                         </ol>
                     </div>
@@ -29,11 +29,9 @@
                         <!-- general form elements -->
                         <x-error></x-error>
                         <x-success></x-success>
+                        
                         <div class="card card-primary">
-                            <div class="card-header">
-                                <h3 class="card-title">Add Major</h3>
-                            </div>
-                            <!-- /.card-header -->
+                            
                             <!-- form start -->
                             
                             <form action="{{ route('major.store') }}" method="POST" enctype="multipart/form-data">
