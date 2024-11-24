@@ -17,12 +17,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('image')->nullable();
-            $table->enum('role',['patient','admin','doctor'])->default('patient');
+            // $table->enum('role',['patient','admin','doctor'])->default('patient');
             $table->boolean('is_active')->default(true);
             $table->timestamp('email_verified_at')->nullable();
 
-            $table->unsignedBigInteger('major_id')->nullable();
-            $table->foreign('major_id')->references('id')->on('majors');
+            // $table->unsignedBigInteger('major_id')->nullable();
+            // $table->foreign('major_id')->references('id')->on('majors');
 
             $table->rememberToken();
             $table->timestamps();

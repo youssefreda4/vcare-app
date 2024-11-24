@@ -11,7 +11,6 @@ class AdminHomeController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
-        return view('admin.pages.home.index',compact('user'));
+        return view('admin.pages.home.index');
     }
 }

@@ -13,15 +13,11 @@ use App\Http\Controllers\Admin\MajorController;
 
 Route::get('/admin/home', [AdminHomeController::class, 'index'])->name('dashboard.home');
 
-Route::get('/admin/majors', [MajorController::class, 'index'])->name('major.view');
-
-Route::get('/admin/majors/add', [MajorController::class, 'create'])->name('major.create');
-
-Route::post('/admin/majors', [MajorController::class, 'store'])->name('major.store');
-
-Route::get('/admin/majors/{major}/edit', [MajorController::class, 'edit'])->name('major.edit');
-
-Route::put('/admin/majors/{major}', [MajorController::class, 'update'])->name('major.update');
-
-Route::delete('/admin/majors/{major}', [MajorController::class, 'destory'])->name('major.delete');
-
+Route::controller(MajorController::class)->group(function () {
+    Route::get('/admin/majors', 'index')->name('major.view');
+    Route::get('/admin/majors/add', 'create')->name('major.create');
+    Route::post('/admin/majors', 'store')->name('major.store');
+    Route::get('/admin/majors/{major}/edit', 'edit')->name('major.edit');
+    Route::put('/admin/majors/{major}', 'update')->name('major.update');
+    Route::delete('/admin/majors/{major}', 'destory')->name('major.delete');
+});

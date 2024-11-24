@@ -23,14 +23,14 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $roles = ['admin', 'doctor', 'patient'];
-        $role = $roles[rand(0, 2)];
+        // $roles = ['admin', 'doctor', 'patient'];
+        // $role = $roles[rand(0, 2)];
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'role' => $role,
-            'major_id' => $role == 'doctor' ? rand(1,100) : null ,
+            // 'role' => $role,
+            // 'major_id' => $role == 'doctor' ? rand(1,100) : null ,
             'image' => "1.png",
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),

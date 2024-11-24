@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Admin;
 use App\Models\Major;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -16,9 +17,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Major::factory(100)->create();
+        Major::factory(50)->create();
 
-        User::factory(150)->create();
+        User::factory(10)->create();
 
         // User::factory()->create([
         //    'name' => "test name",
@@ -30,6 +31,7 @@ class DatabaseSeeder extends Seeder
         //     'password' => Hash::make('password'),
         //     'remember_token' => Str::random(10),
         // ]);
+        Admin::factory(5)->create();
 
     }
 }

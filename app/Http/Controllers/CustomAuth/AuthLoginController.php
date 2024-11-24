@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CustomAuth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,26 +14,25 @@ class AuthLoginController extends Controller
         return view('auth.login');
     }
 
-    public function store(Request $request)
+    public function store(LoginRequest $request)
     {
-        $request->validate([
-            'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string', 'min:8']
-        ]);
 
+        $data = $request->validated();
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            // $request->session()->regenerate();
-
-            $user = Auth::user();
-            if ($user->role === 'admin') {
-                return redirect()->route('dashboard.home');
-            } else {
-
-                return redirect()->route('home');
-            }
+        if (Auth::guard('admin')->attempt($data)) {
+            Auth::guard('admin');
+            return to_route('dashboard.home');
+        }
+        if (Auth::guard('web')->attempt($data)) {
+            return to_route('home');
         }
 
         return back()->withErrors(['error' => 'Incorrect email or password']);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('home');
     }
 }

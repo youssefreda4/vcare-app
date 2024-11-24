@@ -13,7 +13,7 @@ class HomeController extends Controller
     {
         //->take(4)->get()
         $majors = Major::limit(4)->get();
-        $doctors = User::with('major')->where('role', 'doctor')->limit(4)->get();
+        $doctors = User::limit(4)->get();
         return view('front.home', compact('majors', 'doctors'));
     }
 }
