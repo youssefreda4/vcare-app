@@ -42,12 +42,16 @@
                         <a type="button" class="btn btn-outline-light navigation--button"
                             href="{{ url('/doctors') }}">Doctors</a>
                         @guest
-                            <a type="button" class="btn btn-outline-light navigation--button" href="{{ route('auth.login') }}">login</a>
+                            <a type="button" class="btn btn-outline-light navigation--button"
+                                href="{{ route('login') }}">login</a>
                             <a type="button" class="btn btn-outline-light navigation--button"
                                 href="{{ route('auth.register') }}">Register</a>
                         @endguest
 
                         @auth
+                            <a type="button" class="btn btn-outline-light navigation--button"
+                                href="{{ route('appointments.view') }}">Appointments</a>
+
                             <form action="{{ route('auth.logout') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-outline-light navigation--button">Logout</button>
@@ -158,8 +162,10 @@
                     <a href="{{ url('/') }}" class="link text-white">Home</a>
                     <a href="{{ url('/majors') }}" class="link text-white">Majors</a>
                     <a href="{{ url('/doctors') }}" class="link text-white">Doctors</a>
-                    <a href="./login.html" class="link text-white">Login</a>
-                    <a href="./register.html" class="link text-white">Register</a>
+                    @guest
+                        <a href="{{ route('login') }}" class="link text-white">Login</a>
+                        <a href="{{ route('auth.register') }}" class="link text-white">Register</a>
+                    @endguest
                     <a href="{{ url('contact') }}" class="link text-white">Contact</a>
                 </div>
             </div>

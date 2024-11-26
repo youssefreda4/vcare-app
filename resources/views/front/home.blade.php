@@ -53,7 +53,7 @@
                                 <div class="card-body d-flex flex-column gap-1 justify-content-center">
                                     <h4 class="card-title fw-bold text-center"> {{ $doctor->name }} </h4>
                                     <h6 class="card-title fw-bold text-center">{{ $doctor->major->name }}</h6>
-                                    <a href="./doctors/doctor.html" class="btn btn-outline-primary card-button">Book
+                                    <a href="{{ route('appointments.create',$doctor->id) }}" class="btn btn-outline-primary card-button">Book
                                         an
                                         appointment</a>
                                 </div>

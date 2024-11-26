@@ -10,9 +10,11 @@
 
         <div class="row">
             @auth
-                <div class="col-12 my-5 text-center">
-                    <a type="button" class="btn btn-success " href="{{ url('majors/add') }}">Add Majors</a>
-                </div>
+                @if (auth()->user()->role == 'admin')
+                    <div class="col-12 my-5 text-center">
+                        <a type="button" class="btn btn-success " href="{{ url('majors/add') }}">Add Majors</a>
+                    </div>
+                @endif
             @endauth
 
         </div>
@@ -29,15 +31,17 @@
                         <a href="{{ url('majors/' . $major->id . '/doctors') }}"
                             class="btn btn-outline-primary card-button">Browse Doctors</a>
                         @auth
-                            <a href="{{ url('majors/' . $major->id . '/edit') }}"
-                                class="btn btn-outline-info mt-2 card-button">Edit
-                                Major</a>
-                            {{-- for delete must be form --}}
-                            <form action="{{ url('majors/' . $major->id) }}" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger mt-2 card-button">Delete Major</button>
-                            </form>
+                            @if (auth()->user()->role == 'admin')
+                                <a href="{{ url('majors/' . $major->id . '/edit') }}"
+                                    class="btn btn-outline-info mt-2 card-button">Edit
+                                    Major</a>
+                                {{-- for delete must be form --}}
+                                <form action="{{ url('majors/' . $major->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger mt-2 card-button">Delete Major</button>
+                                </form>
+                            @endif
                         @endauth
                     </div>
                 </div>

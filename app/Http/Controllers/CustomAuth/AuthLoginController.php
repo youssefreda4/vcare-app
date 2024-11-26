@@ -17,13 +17,12 @@ class AuthLoginController extends Controller
     {
         $request->validate([
             'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string', 'min:8']
+            'password' => ['required', 'string']
         ]);
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            $request->session()->regenerate();
-
-            return redirect()->route('home');
+            $user = Auth::user();
+            return redirect()->intended('home');
         }
 
         return back()->withErrors(['error' => 'Incorrect email or password']);
