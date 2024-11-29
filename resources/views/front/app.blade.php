@@ -26,7 +26,7 @@
         <nav class="navbar navbar-expand-lg navbar-expand-md bg-blue sticky-top">
             <div class="container">
                 <div class="navbar-brand">
-                    <a class="fw-bold text-white m-0 text-decoration-none h3" href="{{ url('/') }}">VCare</a>
+                    <a class="fw-bold text-white m-0 text-decoration-none h3" href="{{ route('home') }}">VCare</a>
                 </div>
                 <button class="navbar-toggler btn-outline-light border-0 shadow-none" type="button"
                     data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -36,11 +36,11 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                     <div class="d-flex gap-3 flex-wrap justify-content-center" role="group">
                         <a type="button" class="btn btn-outline-light navigation--button"
-                            href="{{ url('/') }}">Home</a>
+                            href="{{ route('home') }}">Home</a>
                         <a type="button" class="btn btn-outline-light navigation--button"
-                            href="{{ url('/majors') }}">Majors</a>
+                            href="{{ route('majors.view') }}">Majors</a>
                         <a type="button" class="btn btn-outline-light navigation--button"
-                            href="{{ url('/doctors') }}">Doctors</a>
+                            href="{{ route('doctors.view') }}">Doctors</a>
                         @guest
                             <a type="button" class="btn btn-outline-light navigation--button"
                                 href="{{ route('login') }}">login</a>
@@ -159,14 +159,14 @@
             <div class="col-sm order-sm-2">
                 <h1 class="h1">Links</h1>
                 <div class="links d-flex gap-2 flex-wrap">
-                    <a href="{{ url('/') }}" class="link text-white">Home</a>
-                    <a href="{{ url('/majors') }}" class="link text-white">Majors</a>
-                    <a href="{{ url('/doctors') }}" class="link text-white">Doctors</a>
+                    <a href="{{ route('home') }}" class="link text-white">Home</a>
+                    <a href="{{ route('majors.view') }}" class="link text-white">Majors</a>
+                    <a href="{{ route('doctors.view') }}" class="link text-white">Doctors</a>
                     @guest
                         <a href="{{ route('login') }}" class="link text-white">Login</a>
                         <a href="{{ route('auth.register') }}" class="link text-white">Register</a>
                     @endguest
-                    <a href="{{ url('contact') }}" class="link text-white">Contact</a>
+                    <a href="{{ route('contact.view') }}" class="link text-white">Contact</a>
                 </div>
             </div>
         </div>

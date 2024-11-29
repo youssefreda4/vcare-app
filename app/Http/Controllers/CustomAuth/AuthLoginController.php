@@ -22,7 +22,7 @@ class AuthLoginController extends Controller
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
-            return redirect()->intended('home');
+            return redirect()->intended();
         }
 
         return back()->withErrors(['error' => 'Incorrect email or password']);

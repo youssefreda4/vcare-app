@@ -9,7 +9,7 @@
         </nav>
         <div class="d-flex flex-column gap-3 account-form mx-auto mt-5">
 
-            <form class="form" action="{{ url('/send-message') }}" method="POST">
+            <form class="form" action="{{ route('contact.store') }}" method="POST">
                 {{-- CSRF attack --}}
                 @csrf
 

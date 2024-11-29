@@ -16,13 +16,16 @@ Route::middleware('auth')->group(function () {
     route::post('/appointments/{user}', [AppointmentController::class, 'store'])->name('appointments.store');
 });
 
+Route::controller(ContactController::class)->group(function () {
+    Route::get('/contact', "index")->name('contact.view');
+    Route::post('/send-message', "sendMessage")->name('contact.store');
+});
 
-Route::get('/contact', [ContactController::class, "index"]);
-Route::post('/send-message', [ContactController::class, "sendMessage"]);
+Route::controller(MajorController::class)->group(function () {
+    Route::get('/majors', "index")->name('majors.view');
+    Route::get('/majors/{major}/doctors', "doctors")->name('majors.doctors.view');
+});
 
-Route::get('/majors', [MajorController::class, "index"]);
-Route::get('/majors/{major}/doctors', [MajorController::class, "doctors"]);
-
-require_once('admin.php');
+require_once(__DIR__ . '/admin.php');
 require_once(__DIR__ . '/auth.php');
 require_once(__DIR__ . '/api.php');

@@ -28,7 +28,7 @@
                         class="card-img-top rounded-circle card-image-circle" alt="major">
                     <div class="card-body d-flex flex-column gap-1 justify-content-center">
                         <h4 class="card-title fw-bold text-center">{{ $major->name }}</h4>
-                        <a href="{{ url('majors/' . $major->id . '/doctors') }}"
+                        <a href="{{ route('majors.doctors.view' , $major->id ) }}"
                             class="btn btn-outline-primary card-button">Browse Doctors</a>
                         @auth
                             @if (auth()->user()->role == 'admin')
