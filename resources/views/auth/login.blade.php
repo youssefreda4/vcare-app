@@ -4,7 +4,7 @@
         <div class="row ">
             <div class="col-6 mx-auto mt-5 ">
 
-                <form class="my-5 border p-3" action="{{ route('auth.login') }}" method="POST" enctype="multipart/form-data">
+                <form class="my-5 border p-3" action="{{ route('login') }}" method="POST" enctype="multipart/form-data">
                     {{-- CSRF attack --}}
                     @csrf
                     <div class="mb-3">

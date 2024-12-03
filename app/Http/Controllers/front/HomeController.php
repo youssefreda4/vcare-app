@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\front;
 
-use App\Http\Controllers\Controller;
-use App\Models\Major;
 use App\Models\User;
+use App\Models\Major;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {

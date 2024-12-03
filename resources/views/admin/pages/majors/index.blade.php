@@ -25,6 +25,14 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
+                     <!-- Form Section -->
+                     <div class="mb-4">
+                        <form action="{{ route('major.search') }}" method="POST" class="d-flex gap-2" novalidate>
+                            @csrf
+                            <input type="text" class="form-control" name="search" placeholder="Major Name" required>
+                            <button type="submit" class="btn btn-primary ml-3">Search</button>
+                        </form>
+                    </div>
                     <!-- left column -->
                     <div class="col-md-12">
                         <div>
@@ -49,7 +57,7 @@
                                     </thead>
                                     <tbody>
 
-                                        @foreach ($majors as $major)
+                                        @forelse ($majors as $major)
                                             <tr>
                                                 <td>{{ $major->id }}</td>
                                                 <td>{{ $major->name }}</td>
@@ -70,7 +78,11 @@
                                                     </form>
                                                 </th>
                                             </tr>
-                                        @endforeach
+                                            @empty
+                                            <div class="text-center alert alert-info">
+                                                There is no majors !
+                                            </div>
+                                        @endforelse
 
                                     </tbody>
                                 </table>

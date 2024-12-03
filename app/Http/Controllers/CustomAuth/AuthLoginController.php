@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\CustomAuth;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\LoginRequest;
+use App\Models\Admin;
 use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthLoginController extends Controller
 {
@@ -20,11 +22,14 @@ class AuthLoginController extends Controller
         $data = $request->validated();
 
         if (Auth::guard('admin')->attempt($data)) {
-            Auth::guard('admin');
-            return to_route('dashboard.home');
+            $user = Auth::guard('admin')->user();
+            Auth::login($user);
+            return redirect()->route('dashboard.home');
         }
         if (Auth::guard('web')->attempt($data)) {
-            return to_route('home');
+            $user = Auth::guard('web')->user();
+            Auth::login($user);
+            return redirect()->route('home');
         }
 
         return back()->withErrors(['error' => 'Incorrect email or password']);
@@ -32,7 +37,8 @@ class AuthLoginController extends Controller
 
     public function logout()
     {
-        Auth::logout();
+        Auth::guard('admin')->logout();
+        Auth::guard('web')->logout();
         return redirect()->route('home');
     }
 }

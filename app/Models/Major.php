@@ -12,8 +12,8 @@ class Major extends Model
 
     protected $fillable = ["name","image"];
 
-    public function users(){
-        return $this->hasMany(User::class);
+    public function doctor(){
+        return $this->hasMany(Doctor::class);
     }
 }
 

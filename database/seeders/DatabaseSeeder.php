@@ -2,13 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use App\Models\Admin;
 use App\Models\Major;
-use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Doctor;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,8 +19,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         Major::factory(50)->create();
-
         User::factory(10)->create();
+        Admin::factory(5)->create();
+        Doctor::factory(30)->create();
+
 
         // User::factory()->create([
         //    'name' => "test name",
@@ -31,7 +34,6 @@ class DatabaseSeeder extends Seeder
         //     'password' => Hash::make('password'),
         //     'remember_token' => Str::random(10),
         // ]);
-        Admin::factory(5)->create();
 
     }
 }
