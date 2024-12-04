@@ -28,4 +28,4 @@ Route::controller(MajorController::class)->group(function () {
 
 require_once(__DIR__ . '/admin.php');
 require_once(__DIR__ . '/auth.php');
-require_once(__DIR__ . '/api.php');
+require_once(__DIR__ . '/api-old.php');
