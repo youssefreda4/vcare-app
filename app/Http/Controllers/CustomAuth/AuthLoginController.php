@@ -25,8 +25,13 @@ class AuthLoginController extends Controller
             $user = Auth::guard('admin')->user();
             Auth::login($user);
             return redirect()->route('dashboard.home');
-        }
-        if (Auth::guard('web')->attempt($data)) {
+        } elseif (Auth::guard('doctor')->attempt($data)) {
+
+            $user = Auth::guard('doctor')->user();
+            Auth::login($user);
+            return redirect()->route('doctor.appointment.view');
+
+        } elseif (Auth::guard('web')->attempt($data)) {
             $user = Auth::guard('web')->user();
             Auth::login($user);
             return redirect()->route('home');
@@ -39,6 +44,7 @@ class AuthLoginController extends Controller
     {
         Auth::guard('admin')->logout();
         Auth::guard('web')->logout();
+        Auth::guard('doctor')->logout();
         return redirect()->route('home');
     }
 }

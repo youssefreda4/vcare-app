@@ -33,27 +33,35 @@ class DoctorController extends Controller
         return redirect()->route('doctor.create')->with("success", "Your Doctor created successfully");
     }
 
-    public function edit(Doctor $doctor) {
+    public function edit(Doctor $doctor)
+    {
         $majors = Major::all();
-        return view('admin.pages.doctors.edit',compact('doctor','majors'));
+        return view('admin.pages.doctors.edit', compact('doctor', 'majors'));
     }
 
 
-    public function search(Request $request){
-        $doctors = Doctor::where('name','like',"%$request->search%")
-        ->with('major')
-        ->paginate(5);
+    public function search(Request $request)
+    {
+        $doctors = Doctor::where('name', 'like', "%$request->search%")
+            ->with('major')
+            ->paginate(5);
         return view('admin.pages.doctors.index', compact('doctors'));
-
     }
 
 
-    public function update(Doctor $doctor) {
-          //vaidation
-          request()->validate(
+    public function update(Doctor $doctor)
+    {
+        //vaidation
+        request()->validate(
             [
-                "name" => 'required', 'string', 'max:30', 'min:5',
-                'email' => 'required', 'string', 'email', 'unique:doctors',
+                "name" => 'required',
+                'string',
+                'max:30',
+                'min:5',
+                'email' => 'required',
+                'string',
+                'email',
+                'unique:doctors',
                 'major_id' => 'required',
             ]
         );
@@ -68,8 +76,8 @@ class DoctorController extends Controller
 
         $doctor->update([
             'name' => request()->name,
-            'email'=>request()->email,
-            'major_id'=>request()->major_id,
+            'email' => request()->email,
+            'major_id' => request()->major_id,
             "image" => $image_name,
         ]);
         // $major->name = request()->name;
@@ -78,7 +86,8 @@ class DoctorController extends Controller
 
         return redirect()->route('doctor.edit', ['doctor' => $doctor->id])->with('success', 'data updated successfully');
     }
-    public function destroy(Doctor $doctor) {
+    public function destroy(Doctor $doctor)
+    {
         $this->delete('uploads/doctors/', $doctor->image);
         $doctor->delete();
         return back()->with('success', 'data deleted successfully');

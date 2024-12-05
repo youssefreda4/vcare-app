@@ -17,6 +17,10 @@ class User extends Authenticatable
         return $this->hasMany(Appointment::class);
     }
 
+    public function report(){
+        return $this->hasMany(Report::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -26,6 +30,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image',
     ];
 
     /**
