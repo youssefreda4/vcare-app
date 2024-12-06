@@ -135,7 +135,7 @@
                           </div>
                       </div>
                   @endforelse
-                  @if (auth()->guard('admin')->user()->unreadNotifications->count() != 0)
+                  @if (auth()->guard('admin')->user()->unreadNotifications->count() >= 5)
                       <div>
                           <a href="{{ route('admin.all.notifications') }}" class="dropdown-item dropdown-footer">Mark
                               All Notifications is Read</a>
