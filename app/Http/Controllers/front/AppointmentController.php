@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\front;
 
 
+use App\Models\Admin;
+use App\Models\Doctor;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Doctor;
+use App\Notifications\AppointmentNotification;
 
 class AppointmentController extends Controller
 {
@@ -44,6 +46,10 @@ class AppointmentController extends Controller
             'doctor_id' => $doctor->id
         ]);
 
+        $admins = Admin::all();
+        foreach ($admins as $admin) {
+            $admin->notify(new AppointmentNotification($data));
+        }
 
         //send email
         // Mail::to(auth()->user()->email)->send(new ConfirmationAppointmentMail([

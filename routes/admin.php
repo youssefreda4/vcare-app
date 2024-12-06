@@ -21,6 +21,8 @@ Route::middleware('admin.area')->group(function () {
 
      Route::controller(AdminHomeController::class)->group(function () {
           Route::get('/admin/home', 'index')->name('dashboard.home');
+          Route::get('/admin/home/markasread/{id}', 'markAsRead')->name('admin.notifications');
+          Route::get('/admin/home/markasread/', 'markAllAsRead')->name('admin.all.notifications');
      });
 
      Route::controller(MessageController::class)->group(function () {
