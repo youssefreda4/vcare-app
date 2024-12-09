@@ -8,6 +8,8 @@ use App\Models\Doctor;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ConfirmationAppointmentMail;
 use App\Notifications\AppointmentNotification;
 
 class AppointmentController extends Controller
@@ -51,7 +53,7 @@ class AppointmentController extends Controller
             $admin->notify(new AppointmentNotification($data));
         }
 
-        //send email
+        // send email
         // Mail::to(auth()->user()->email)->send(new ConfirmationAppointmentMail([
         //    'name' => $request->name,
         //     'email' => $request->email,
